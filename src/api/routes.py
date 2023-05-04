@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Todo
 from api.utils import generate_sitemap, APIException
 
 api = Blueprint('api', __name__)
@@ -16,3 +16,14 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
+
+@api.route('/todos', methods=['GET'])
+def get_all_todos():
+  
+    response_body = {
+        "message": "List of all active Toddos:"
+    }
+
+    todos = Todo.query.all()
+    todos_serialzied =  [todo.serialize() for todo in todos]
+    return jsonify({"todos": todos_serialzied}), 200
