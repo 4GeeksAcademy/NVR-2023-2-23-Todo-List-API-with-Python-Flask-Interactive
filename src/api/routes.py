@@ -39,3 +39,18 @@ def create_todo():
     todos = Todo.query.all()
     todos_serialzied =  [todo.serialize() for todo in todos]
     return jsonify({"todos": todos_serialzied}), 200
+
+
+@api.route('/todos/<int:position>', methods=['DELETE'])
+def delete_todo(position):
+  
+    todo_to_delete = Todo.query.offset(position - 1).limit(1).first()
+    if not todo_to_delete:
+        return ({"error": "No record exists at that position"}), 400
+
+    db.session.delete(todo_to_delete)
+    db.session.commit()
+
+    todos = Todo.query.all()
+    todos_serialzied =  [todo.serialize() for todo in todos]
+    return jsonify({"todos": todos_serialzied}), 200
