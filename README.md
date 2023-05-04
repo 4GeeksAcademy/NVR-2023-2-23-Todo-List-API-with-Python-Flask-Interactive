@@ -1,3 +1,13 @@
+***************************************************************************************************************
+Exercise #23: Todo List using rest API with Python/SQL Alchemy and Flask
+
+
+By Nuno Rodrigues
+
+Mark received:
+Date: 
+Teacher:
+***************************************************************************************************************
 # WebApp boilerplate with React JS and Flask API
 
 Build web applications using React.js for the front end and python/flask for your backend API.
