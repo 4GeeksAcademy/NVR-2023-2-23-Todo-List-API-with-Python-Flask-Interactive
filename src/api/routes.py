@@ -27,3 +27,15 @@ def get_all_todos():
     todos = Todo.query.all()
     todos_serialzied =  [todo.serialize() for todo in todos]
     return jsonify({"todos": todos_serialzied}), 200
+
+@api.route('/todos', methods=['POST'])
+def create_todo():
+  
+    body= request.json
+    new_todo = Todo(label=body["label"] , done=body["done"])
+    db.session.add(new_todo)
+    db.session.commit()
+
+    todos = Todo.query.all()
+    todos_serialzied =  [todo.serialize() for todo in todos]
+    return jsonify({"todos": todos_serialzied}), 200

@@ -18,6 +18,7 @@ class User(db.Model):
             # do not serialize the password, its a security breach
         }
 
+# "done" is set to False by default, since this is a list of active tasks
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     label = db.Column(db.String(120), unique=True, nullable=False)
